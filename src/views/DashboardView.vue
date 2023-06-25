@@ -39,34 +39,11 @@
           </v-list>
         </v-navigation-drawer> -->
 
-        <v-container v-on:vue:mounted="getCriptoData" class="px-1 py-1">
-    <v-row justify="space-around">
-      <v-col cols="12" sm="8" md="6" lg="4">
-      <v-card>
-        <v-img
-          height="70"
-          src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-          cover
-          class="text-white"
-        >
-          <v-toolbar
-            color="rgba(0, 0, 0, 0)"
-            theme="dark"
-          >
-            <template v-slot:prepend>
-              <v-btn icon="$menu"></v-btn>
-            </template>
-
-            <v-toolbar-title class="text-h6">
-              Criptomonedas
-            </v-toolbar-title>
-
-            <template v-slot:append>
-              <v-btn icon="mdi-dots-vertical"></v-btn>
-            </template>
-          </v-toolbar>
-        </v-img>
-
+        <v-container v-on:vue:mounted="getCriptoData" class="px-2 py-2">
+        <v-row justify="space-around">
+          <v-col cols="12" sm="8" md="6" lg="4">
+          <v-card>          
+         <ToolBar :title="Criptomonedas"/>
         <v-card-text>
 
           <v-timeline density="compact" align="start">
@@ -90,10 +67,11 @@
     import axios from 'axios';
     import { mapMutations } from "vuex";
     import customStore from '@/store/store.js';
+    import ToolBar from '@/components/ToolBar.vue';
     import CriptoCard from '@/components/CriptoCard.vue';
 
       export default {
-  components: { CriptoCard },
+  components: { CriptoCard, ToolBar },
         data () {
           return {
             items: [
