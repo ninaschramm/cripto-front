@@ -1,0 +1,102 @@
+<template>
+ <v-container v-on:vue:mounted="getUSerData" class="px-2 py-2">
+        <v-row justify="space-around">
+          <v-col cols="12" sm="8" md="6" lg="4">
+          <v-card class="elevation-12">          
+         <ToolBar :title="title"/>    
+
+                <v-card-item>
+                    <v-card-title>Hola, {{ user ? user.name : "" }}!</v-card-title>              
+                </v-card-item>
+
+                <div class="profile-image my-1 mx-auto" 
+                :style="{ backgroundImage: `url(${user ? user.image : 'https://cdn.vuetifyjs.com/images/cards/cooking.png'})` }">
+                </div>           
+
+                <v-card-text>
+
+                <div class="text-subtitle-1 my-2">
+                    {{ user ? user.email : "" }}
+                </div>
+
+                <v-divider :thickness="2" class="border-opacity-25 my-3 mx-1"></v-divider>
+
+                <div class="text-subtitle-1">
+                    Descripción:
+                </div>
+
+                <div class="my-0 text-subtitle-3">
+                   {{ user ? user.description : "" }}
+                </div>
+
+                </v-card-text>
+
+
+                <v-card-actions class="custom-actions">
+                <v-btn
+                    color="primary"
+                    variant="tonal"
+                    @click="logout"
+                    block
+                    class="elevation-4"
+                >
+                    Logout
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+          </v-col>
+       </v-row>
+    </v-container>  
+</template>
+
+<script>
+import axios from 'axios';
+import { mapMutations } from "vuex";
+import customStore from '@/store/store.js';
+import ToolBar from '@/components/ToolBar.vue';
+
+export default {
+  components: { ToolBar },
+  data () {
+    return {
+      config: {
+        headers: {
+          Authorization: `Bearer ${customStore.state.token}`
+        }},
+      user: null,  
+      title: "Mi perfil"       
+    }
+  },
+  methods: {
+    ...mapMutations(["setToken"]),
+    async getUSerData() {
+        console.log(this.config.headers.Authorization)
+      try {
+        const response = await axios.get('http://localhost:5000/user', this.config);
+        this.user = response.data
+      } catch (error) {
+        console.log(error.message)
+        alert(error.message)
+      } 
+    },   
+    logout() {
+      customStore.commit('setToken', '');
+      this.$router.replace({name:'login'})
+    }
+  }
+}
+</script>
+
+<style>
+.profile-image {
+  object-fit: cover;
+  border-radius: 75px;
+  height: 150px;
+  width: 150px;
+}
+
+.custom-actions {
+  width: 100%;
+  justify-content: center;
+}
+</style>

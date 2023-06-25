@@ -2,10 +2,7 @@
     <v-toolbar
     dark color="primary"
     >
-        <template v-slot:prepend>
-            <v-btn icon="$menu"></v-btn>
-        </template>
-
+        <dropdown-menu-vue />
         <v-toolbar-title class="text-h6">
               {{ title }}
         </v-toolbar-title>
@@ -19,14 +16,16 @@
 </template>
 
 <script>
-export default {
-    props: {
-            title: {
-            type: String,
-            default: "Criptomonedas" // Default value if not provided
-            },
-        }
-}
+    import DropdownMenuVue from './DropdownMenu.vue';
+    export default {
+        components: { DropdownMenuVue },
+        props: {
+                title: {
+                type: String,
+                default: "Criptomonedas" // Default value if not provided
+                },
+            }
+    }
 </script>
 
 <style>
