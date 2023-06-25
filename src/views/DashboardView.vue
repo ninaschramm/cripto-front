@@ -1,6 +1,5 @@
 <template>
-    <v-app>
-          <v-navigation-drawer permanent>
+          <!-- <v-navigation-drawer permanent>
             <v-list>
               <v-list-item class="px-2">
                 <v-list-item-avatar>
@@ -38,12 +37,14 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
-        </v-navigation-drawer>
-        <v-container v-on:vue:mounted="getCriptoData">
+        </v-navigation-drawer> -->
+
+        <v-container v-on:vue:mounted="getCriptoData" class="px-1 py-1">
     <v-row justify="space-around">
-      <v-card width="400">
+      <v-col cols="12" sm="8" md="6" lg="4">
+      <v-card>
         <v-img
-          height="100"
+          height="70"
           src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
           cover
           class="text-white"
@@ -57,7 +58,7 @@
             </template>
 
             <v-toolbar-title class="text-h6">
-              Messages
+              Criptomonedas
             </v-toolbar-title>
 
             <template v-slot:append>
@@ -69,9 +70,9 @@
         <v-card-text>
 
           <v-timeline density="compact" align="start">
-            <v-timeline-item
+            <v-timeline-item width="100%"
               v-for="message in messages"
-              :key="message.time"
+              :key="message.id"
               :dot-color="message.color"
               size="x-small"
             >
@@ -80,9 +81,9 @@
           </v-timeline>
         </v-card-text>
       </v-card>
+    </v-col>
     </v-row>
   </v-container>
-    </v-app>
     </template>
     
     <script>

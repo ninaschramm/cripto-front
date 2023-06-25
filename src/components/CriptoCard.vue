@@ -1,5 +1,5 @@
 <template>
-    <v-card width="300">
+    <v-card :style="cardStyle">
       <div class="card-header">
         <div class="title">
           <v-card-title class="pb-0">
@@ -13,7 +13,7 @@
           <v-card-text class="pb-1" color="orange-lighten-2" variant="text">
             $ {{ price }}
           </v-card-text>
-          <v-card-text class="change-text py-0" color="orange-lighten-2" variant="text">
+          <v-card-text class="change-text py-0" :class="{'change-text': true, 'positive': change && !change.startsWith('-'), 'negative': change && change.startsWith('-')}" variant="text">
             {{ change+"%" }}
           </v-card-text>
         </div>
@@ -60,7 +60,14 @@
             type: String,
             default: "" // Default value if not provided
             },
-         }
+         },
+         computed: {
+            cardStyle() {
+            return {
+                width: '100%',
+            };
+            },
+        },
     }
   </script>
 
@@ -85,6 +92,13 @@
   font-size: smaller;
 }
 
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
 .custom-card-actions {
   height: 48px;
 }

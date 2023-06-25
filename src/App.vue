@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="grey lighten-5">
+  <v-container fluid class="grey lighten px-0 py-0">
       <router-view />
   </v-container>
   </template>
