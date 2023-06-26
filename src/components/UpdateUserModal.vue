@@ -44,16 +44,10 @@
             };
             // Emit the event to notify the parent component
             this.$emit("user-updated", updatedUser);
-            // Close the modal
-            this.dialog = false;
         },
-        closeModal() {
-            const updatedUser = {
-                ...this.user
-            }
+        closeModal() {            
             // Clear the form fields
-            this.$emit("user-updated", updatedUser);
-            this.dialog = false;
+            this.$emit("not-updated");
         },
     },
   };

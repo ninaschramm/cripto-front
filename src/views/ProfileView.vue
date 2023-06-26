@@ -11,7 +11,7 @@
                     <v-tooltip text="Editar perfil">
                       <template v-slot:activator="{ props }">                        
                         <v-btn icon="mdi-account-edit" v-bind="props" class="elevation-0" @click="openModal"></v-btn> 
-                        <update-user-modal-vue v-if="showModal" v-model="showModal" @user-updated="handleUserUpdate" :user="user"></update-user-modal-vue>                  
+                        <update-user-modal-vue v-if="showModal" v-model="showModal" @user-updated="handleUserUpdate" @not-updated="closeModal" :user="user"></update-user-modal-vue>                  
                       </template>
                     </v-tooltip>          
                     </v-card-title>    
@@ -106,6 +106,9 @@ export default {
       this.updatedUser = updatedUser;
       await this.updateUser();
       // Close the modal if needed
+      this.showModal = false;
+    },
+    closeModal() {
       this.showModal = false;
     },
     async updateUser() {
