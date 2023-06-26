@@ -1,58 +1,23 @@
-# essentials
+## How to run for development
 
-## Project setup
+1. Clone this repository
+2. Install all dependencies
 
-```
-# yarn
-yarn
-
-# npm
-npm install
-
-# pnpm
-pnpm install
+```bash
+npm i
 ```
 
-### Compiles and hot-reloads for development
+3. Populate `.env` file based on `.env.example`. `REACT_APP_API_BASE_URL` should point to your API server (cripto-back)
 
-```
-# yarn
-yarn dev
+4. Run the back-end in a development environment:
 
-# npm
+```bash
 npm run dev
-
-# pnpm
-pnpm dev
 ```
 
-### Compiles and minifies for production
+## Building and starting for production
 
-```
-# yarn
-yarn build
-
-# npm
+```bash
 npm run build
-
-# pnpm
-pnpm build
+npm run dev
 ```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
-# cripto-front
