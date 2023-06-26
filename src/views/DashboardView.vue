@@ -22,7 +22,7 @@
                 :dot-color="'indigo-darken-2'"
                 size="x-small"
               >
-                <cripto-card :name="cripto.name" :symbol="cripto.symbol" :price="formatPrice(cripto.quote.USD.price)" :change="formatChange(cripto.quote.USD.percent_change_1h)"/>
+                <cripto-card :name="cripto.name" :symbol="cripto.symbol" :change="formatChange(cripto.quote.USD.percent_change_1h)" :info="cripto.quote.USD"/>
               </v-timeline-item>
             </v-timeline>
           </v-card-text>
@@ -61,12 +61,6 @@
               console.log(error.message)
               alert(error.message)
             } 
-          },
-          formatPrice(price) {
-            return price.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
           },
           formatChange(change) {
             return change.toFixed(2)
