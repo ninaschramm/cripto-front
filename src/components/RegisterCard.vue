@@ -108,7 +108,6 @@
             password: this.password,
             confirmPassword: this.confirmPassword,
             name: this.name,
-            image: this.image,
             description: this.description,
           });
           console.log(response.data)
