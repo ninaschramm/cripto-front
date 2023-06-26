@@ -65,7 +65,6 @@ import customStore from '@/store/store.js';
           });
           // Use the Vuex store instance to access the setToken mutation
         customStore.commit('setToken', response.data);
-        console.log(customStore.state.token); // Access the token from the store's state
         this.$router.push({ name: "dashboard" });
         } catch (error) {
           console.log(error.message)

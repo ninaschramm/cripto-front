@@ -1,29 +1,38 @@
 <template>
-        <v-container v-on:vue:mounted="getCriptoData" class="px-2 py-2">
-        <v-row justify="space-around">
-          <v-col cols="12" sm="8" md="6" lg="4">
-          <v-card class="elevation-12">          
-         <ToolBar :title="Criptomonedas"/>
-        <v-card-text>
-
-          <v-timeline density="compact" align="start">
-            <v-timeline-item width="100%"
-              v-for="message in messages"
-              :key="message.id"
-              :dot-color="message.color"
-              size="x-small"
-            >
-              <cripto-card :name="message.name" :symbol="message.symbol" :price="formatPrice(message.quote.USD.price)" :change="formatChange(message.quote.USD.percent_change_1h)"/>
-            </v-timeline-item>
-          </v-timeline>
-        </v-card-text>
-      </v-card>
-    </v-col>
+  <v-container v-on:vue:mounted="getCriptoData" class="px-2 py-2">
+    <v-row justify="space-around">
+      <v-col cols="12" sm="8" md="6" lg="4">
+        <v-card class="elevation-12">          
+          <ToolBar :title="'Criptomonedas'"/>          
+            <v-card-text>
+              <div class="input-holder" align="right">
+                <div class="search-input elevation-4 py-1 px-4" >
+                  <input type="text" v-model="search"
+                  placeholder="Search"
+                  color="primary"
+                  >
+                  <v-icon>mdi-magnify</v-icon>
+                </div>                   
+              </div>    
+          
+            <v-timeline density="compact" align="start">
+              <v-timeline-item width="100%"
+                v-for="cripto in filteredCripto"
+                :key="cripto.id"
+                :dot-color="'indigo-darken-4'"
+                size="x-small"
+              >
+                <cripto-card :name="cripto.name" :symbol="cripto.symbol" :price="formatPrice(cripto.quote.USD.price)" :change="formatChange(cripto.quote.USD.percent_change_1h)"/>
+              </v-timeline-item>
+            </v-timeline>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
-    </template>
+</template>
     
-    <script>
+<script>
     import axios from 'axios';
     import { mapMutations } from "vuex";
     import customStore from '@/store/store.js';
@@ -38,8 +47,8 @@
               headers: {
                 Authorization: `Bearer ${customStore.state.token}`
               }},
-            messages: null,
-            user: null,         
+            criptos: null,
+            search: '',      
           }
         },
         methods: {
@@ -47,7 +56,7 @@
           async getCriptoData() {
             try {
               const response = await axios.get('http://localhost:5000/cripto', this.config);
-              this.messages = response.data[1];       
+              this.criptos = response.data[1];       
             } catch (error) {
               console.log(error.message)
               alert(error.message)
@@ -62,6 +71,28 @@
           formatChange(change) {
             return change.toFixed(2)
           },
+        },
+        computed: {
+          filteredCripto() {
+            if (this.criptos === null) {
+              return [];
+            }
+            return this.criptos.filter(cripto => cripto.name.toLowerCase().includes(this.search.toLowerCase()))
+          }
         }
       }
-    </script>
+</script>
+
+<style scoped>
+  .input-holder {
+    width: 100%;
+  }
+  .search-input {
+    width: fit-content;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+</style>

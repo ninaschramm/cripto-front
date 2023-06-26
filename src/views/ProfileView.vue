@@ -70,7 +70,6 @@ export default {
   methods: {
     ...mapMutations(["setToken"]),
     async getUSerData() {
-        console.log(this.config.headers.Authorization)
       try {
         const response = await axios.get('http://localhost:5000/user', this.config);
         this.user = response.data
