@@ -14,6 +14,7 @@ npm i
 ```bash
 npm run dev
 ```
+**Make sure it's running on PORT=5000**
 
 ## Building and starting for production
 
