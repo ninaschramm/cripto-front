@@ -128,7 +128,7 @@ export default {
 
 <style>
 .profile-image {
-  object-fit: cover;
+  background-size: cover;
   border-radius: 75px;
   height: 150px;
   width: 150px;
