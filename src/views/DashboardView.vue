@@ -19,7 +19,7 @@
               <v-timeline-item width="100%"
                 v-for="cripto in filteredCripto"
                 :key="cripto.id"
-                :dot-color="'indigo-darken-4'"
+                :dot-color="'indigo-darken-2'"
                 size="x-small"
               >
                 <cripto-card :name="cripto.name" :symbol="cripto.symbol" :price="formatPrice(cripto.quote.USD.price)" :change="formatChange(cripto.quote.USD.percent_change_1h)"/>
